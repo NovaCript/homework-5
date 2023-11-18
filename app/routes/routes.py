@@ -8,6 +8,20 @@ from app.repositories.repositories import BookRepository
 book_bp = Blueprint('book_bp', __name__, url_prefix='/books')
 
 
+@book_bp.delete('/<int:id>')
+def delete_book(id):
+    book = BookRepository.get_book_by_id(id)
+    if book:
+        try:
+            db.session.delete(book)
+            db.session.commit()
+            return jsonify({'message': 'Book deleted successfully!'})
+        except Exception as e:
+            db.session.rollback()
+            return jsonify(
+                {'message': 'Failed to delete book', 'error': str(e)}), 500
+
+
 @book_bp.get('/<int:id>')
 def get_book(id):
     book = BookRepository.get_book_by_id(id)
