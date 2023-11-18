@@ -13,7 +13,7 @@ pip install -r requirements.txt
 GET http://127.0.0.1:5000/books
 
 Для получения конкретной книги по id:
-GET http://127.0.0.1:5000/books/(значение id)
+GET http://127.0.0.1:5000/books/(значениеid)
 
 Для добавления книг:
 POST http://127.0.0.1:5000/books
@@ -28,3 +28,6 @@ POST http://127.0.0.1:5000/books
     "publish_year":2023,
     "pages_count":5
 }
+
+Для удаления книги:
+DELETE http://127.0.0.1:5000/books/(значениеid)
