@@ -71,3 +71,24 @@ class ConfigurateBook:
         except Exception as e:
             db.session.rollback()
             return {'message': 'Failed to add book', 'error': str(e)}, 500
+
+
+    @staticmethod
+    def config_update_book(data, book):
+        title = data.get('title')
+        description = data.get('description')
+        publish_year = data.get('publish_year')
+        pages_count = data.get('pages_count')
+
+        book.title = title
+        book.description = description
+        book.publish_year = publish_year
+        book.pages_count = pages_count
+
+        try:
+            db.session.commit()
+            return {'message': 'Book updated successfully!'}
+        except Exception as e:
+            db.session.rollback()
+            return {'message': 'Failed to update book', 'error': str(e)}, 500
+
